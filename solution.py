@@ -50,6 +50,7 @@ def naked_twins(values):
                 twins.append((box, candidate))
     
     # Eliminate the naked twins as possibilities for their peers
+    
     for pair in twins:
         #common unit(s) between the twins
         common_unit = set()
@@ -64,7 +65,7 @@ def naked_twins(values):
         #remove digits in twins from their peers
         for peer in common_unit:
             for digit in values[pair[0]]:
-                values[peer] = values[peer].replace(digit,'')
+                assign_value(values, peer, values[peer].replace(digit,''))
     return values
 
 def grid_values(grid):
@@ -113,7 +114,7 @@ def eliminate(values):
     for box in solved_values:
         digit = values[box]
         for peer in peers[box]:
-            values[peer] = values[peer].replace(digit,'')
+            assign_value(values, peer, values[peer].replace(digit,''))
     return values
 
 def only_choice(values):
